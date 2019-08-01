@@ -1,0 +1,27 @@
+version: '2'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_CREATE_TOPICS: "axon-events:3:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      image: mongo:3.2.4
+  mongodbevent:
+    image: mongo:3.2.4
+    container_name: "mongodbsampleevent"
+    ports:
+      - 27017:27017
+    command: --smallfiles
+  mongodbquery:
+    image: mongo:3.2.4
+    container_name: "mongodbsamplequery"
+    ports:
+      - 27018:27018
+    command: --smallfiles

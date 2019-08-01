@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.hsenasilva.sample.cqrs</groupId>
+    <artifactId>sample-cqrs</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Sample CQRS</name>
+    <description>Sample CQRS With Spring Boot, Axon, Kafka, Mongo</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.4.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <kotlin.version>1.3.40</kotlin.version>
+        <spring-framework.version>2.0.4.RELEASE</spring-framework.version>
+        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+        <spring-cloud-starter-netflix-eureka>2.1.2.RELEASE</spring-cloud-starter-netflix-eureka>
+        <kafka.clients.version>0.11.0.2</kafka.clients.version>
+        <axon-spring-boot-starter.version>4.1.1</axon-spring-boot-starter.version>
+        <axon-spring-cloud-starter.version>4.1</axon-spring-cloud-starter.version>
+        <axon.version>4.0.3</axon.version>
+        <axon-extension.version>4.0</axon-extension.version>
+        <axon-extension-mongo.version>4.0.1</axon-extension-mongo.version>
+        <axon-kafka-spring-boot-starter>4.0-RC2</axon-kafka-spring-boot-starter>
+        <jackson.module.kotlin.version>2.9.9</jackson.module.kotlin.version>
+        <apache-commons.version>3.9</apache-commons.version>
+    </properties>
+
+    <modules>
+        <module>service-discovery</module>
+        <module>query-server</module>
+        <module>command-server</module>
+    </modules>
+
+</project>

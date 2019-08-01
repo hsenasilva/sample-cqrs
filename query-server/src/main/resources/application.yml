@@ -1,0 +1,29 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: query-sample
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+#  jackson:
+#    serialization:
+#      indent-output: true
+#      write-dates-as-timestamps: false
+#      fail-on-empty-beans: false
+#      fail-on-unknown-properties: false
+
+axon:
+  eventhandling:
+    processors:
+      query:
+        mode: tracking
+        source: kafkaMessageSource
+  kafka:
+    default-topic: axon-events
+    consumer:
+      group-id: query-group
+      bootstrap-servers: localhost:9092
+
+
