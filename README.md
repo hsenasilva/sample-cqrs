@@ -13,7 +13,7 @@ What's Here
 This sample includes:
 
 * README.md - this file
-* docker-compose.yml - this file is used by Docker Compose (https://docs.docker.com/compose/) to running Kafka, Zookeper and Mongo
+* docker-compose.yml - this file is used by Docker Compose (https://docs.docker.com/compose/) to running Kafka, Zookeeper and Mongo
 * pom.xml - this file is the Maven Project Object Model for the web service
 * command-server - this directory contains your Kotlin Service Command source files
 * query-server - this directory contains your Kotlin Service Query source files
