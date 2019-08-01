@@ -10,9 +10,7 @@ import org.axonframework.modelling.command.AggregateIdentifier
 import org.axonframework.modelling.command.AggregateLifecycle.apply
 import org.axonframework.spring.stereotype.Aggregate
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
-import org.springframework.web.client.RestTemplate
 
 /**
  * @author hsena
@@ -28,15 +26,9 @@ class SampleAggregate {
 
     @CommandHandler
     constructor(command: ListSampleCommand) {
-        RestTemplate()
-                .getForEntity("http://www.mocky.io/v2/5d4108fe3100007900539063", Sample::class.java)
-                .apply {
-                    if (this.statusCode == HttpStatus.OK) {
-                        apply(ListedSampleEvent(this.body?.copy(
-                                id = command.listSampleParameter.id),
-                                command.listSampleParameter))
-                    }
-                }
+        apply(ListedSampleEvent(sample = Sample(requestId = command.listSampleParameter.requestId,
+                id = command.listSampleParameter.id, stuff = command.listSampleParameter.stuff),
+                listSampleParameter = command.listSampleParameter))
     }
 
     @EventSourcingHandler

@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.io.Serializable
 import java.util.*
+import javax.validation.constraints.NotNull
 
 /**
  * @author hsena
@@ -12,6 +13,8 @@ import java.util.*
 @Document(collection = "Sample")
 data class Sample(@Id val requestId: String?, val id: Int?, val stuff: String) : Serializable
 
-data class ListSampleParameter(@TargetAggregateIdentifier val requestId: String, val id: Int) {
-    constructor(id: Int) : this(requestId = UUID.randomUUID().toString(), id = id)
+data class SampleParameter(@NotNull val id: Int, @NotNull val stuff: String) : Serializable
+
+data class ListSampleParameter(@TargetAggregateIdentifier val requestId: String, val id: Int, val stuff: String) {
+    constructor(id: Int, stuff: String) : this(requestId = UUID.randomUUID().toString(), id = id, stuff = stuff)
 }
