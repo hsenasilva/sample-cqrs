@@ -3,7 +3,7 @@ CQRS Sample
 
 This sample code helps get you started with a CQRS Pattern
 
-Too know about CQRS: https://martinfowler.com/bliki/CQRS.html
+To know about CQRS: https://martinfowler.com/bliki/CQRS.html
 
 Related technologies: Kotlin, Spring Boot, Axon Framework, Kafka, Zookeeper and Mongo
 
