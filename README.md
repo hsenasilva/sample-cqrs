@@ -30,8 +30,9 @@ local computer. If you haven't, do that first.
 
 2. Install Docker (to run Kafka, Zookeeper and Mongo). See https://docs.docker.com/install/
 
-3. Build the service.
+3. Build the services.
 
+        $ cd sample-cqrs
         $ mvn clean install
 
 4. Run the Docker Compose.
