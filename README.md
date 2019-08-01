@@ -1,4 +1,4 @@
-Sample CQRS Pattern
+CQRS Sample
 ==================================================
 
 This sample code helps get you started with a CQRS Pattern
