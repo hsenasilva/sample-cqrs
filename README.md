@@ -23,7 +23,7 @@ This sample includes:
 Getting Started
 ---------------
 
-To work on the sample code, you'll need to clone your project's repository to your
+To work on the sample code, you'll need to clone project's repository to your
 local computer. If you haven't, do that first.
 
 1. Install maven.  See https://maven.apache.org/install.html for details.
