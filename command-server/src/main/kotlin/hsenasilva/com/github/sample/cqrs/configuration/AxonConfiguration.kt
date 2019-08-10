@@ -36,7 +36,7 @@ class AxonConfiguration {
     @Autowired
     fun registerInterceptors(distributedCommandBus: DistributedCommandBus) {
         registerDispatchInterceptor(distributedCommandBus)
-    }
+    }   
 
     private fun registerDispatchInterceptor(commandBus: CommandBus) {
         commandBus.registerDispatchInterceptor {
