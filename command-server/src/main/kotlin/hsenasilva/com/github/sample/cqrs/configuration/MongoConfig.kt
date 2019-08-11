@@ -4,13 +4,13 @@ import com.mongodb.MongoClient
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.mongodb.core.MongoTemplate
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
+import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories
 
 /**
  * @author hsena
  */
 @Configuration
-@EnableMongoRepositories(basePackages = ["hsenasilva.com.github.sample.cqrs.repository"])
+@EnableReactiveMongoRepositories(basePackages = ["hsenasilva.com.github.sample.cqrs.repository"])
 class MongoConfig {
 
     @Bean

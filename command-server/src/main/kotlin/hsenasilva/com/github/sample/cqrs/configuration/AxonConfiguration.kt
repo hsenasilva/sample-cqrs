@@ -1,7 +1,7 @@
 package hsenasilva.com.github.sample.cqrs.configuration
 
-import hsenasilva.com.github.sample.cqrs.aggregate.SampleAggregate
 import com.mongodb.MongoClient
+import hsenasilva.com.github.sample.cqrs.aggregate.SampleAggregate
 import org.axonframework.commandhandling.CommandBus
 import org.axonframework.commandhandling.CommandMessage
 import org.axonframework.commandhandling.distributed.DistributedCommandBus
@@ -12,7 +12,6 @@ import org.axonframework.eventsourcing.Snapshotter
 import org.axonframework.eventsourcing.eventstore.EventStorageEngine
 import org.axonframework.extensions.mongo.DefaultMongoTemplate
 import org.axonframework.extensions.mongo.eventsourcing.eventstore.MongoEventStorageEngine
-import org.axonframework.messaging.interceptors.BeanValidationInterceptor
 import org.axonframework.spring.eventsourcing.SpringAggregateSnapshotterFactoryBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -36,7 +35,7 @@ class AxonConfiguration {
     @Autowired
     fun registerInterceptors(distributedCommandBus: DistributedCommandBus) {
         registerDispatchInterceptor(distributedCommandBus)
-    }   
+    }
 
     private fun registerDispatchInterceptor(commandBus: CommandBus) {
         commandBus.registerDispatchInterceptor {
@@ -44,11 +43,6 @@ class AxonConfiguration {
                 message.andMetaData(mapOf("tenant" to "sample_segment"))
             }
         }
-    }
-
-    @Autowired
-    fun registerInterceptors(commandBus: CommandBus) {
-        commandBus.registerDispatchInterceptor(BeanValidationInterceptor())
     }
 
     @Bean

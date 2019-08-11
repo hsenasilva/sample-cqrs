@@ -8,7 +8,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient
 
 
 /**
- * @author hsilva
+ * @author hsena
  */
 @EnableEurekaClient
 @SpringBootApplication(exclude = [SecurityAutoConfiguration::class, KafkaAutoConfiguration::class])

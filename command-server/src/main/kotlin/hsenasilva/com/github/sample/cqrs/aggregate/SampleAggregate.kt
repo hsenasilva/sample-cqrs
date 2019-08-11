@@ -35,11 +35,12 @@ class SampleAggregate {
     fun on(event: ListedSampleEvent, @Autowired repository: SampleRepository) {
         this.requestId = event.listSampleParameter.requestId
 
-        event.sample?.also {
-            repository.findById(event.sample.id)?.let {
-                repository.save(event.sample.copy(it.requestId))
-            } ?: repository.save(event.sample)
-        }
+//        TODO - FIX DB STEP
+//        event.sample?.also {
+//            repository.findById(event.sample.id)?.let {
+//                repository.save(event.sample.copy(it.requestId))
+//            } ?: repository.save(event.sample)
+//        }
     }
 
 }
