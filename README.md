@@ -5,12 +5,23 @@ This sample code helps get you started with a CQRS Pattern
 
 To know about CQRS: https://martinfowler.com/bliki/CQRS.html
 
-Related technologies: Kotlin, Spring Boot, Axon Framework, Kafka, Zookeeper and Mongo
+Related technologies: 
+
+Kotlin: https://kotlinlang.org/docs/reference/
+Spring Boot: https://spring.io/projects/spring-boot#overview
+Axon Framework: https://axoniq.io/resources/architectural-concepts
+Apache Kafka: https://kafka.apache.org/intro 
+Zookeeper: https://zookeeper.apache.org/ 
+MongoDB: https://www.mongodb.com/what-is-mongodb
 
 What's Here
 -----------
 
 This sample includes:
+
+* 2 branches
+     master - Normal spring boot application with servlet container.
+     webflux (In progress) - Spring Boot Webflux with Netty server, more functinal style (See https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html for details).
 
 * README.md - this file
 * docker-compose.yml - this file is used by Docker Compose (https://docs.docker.com/compose/) to running Kafka, Zookeeper and Mongo
