@@ -57,6 +57,7 @@ local computer. If you haven't, do that first.
 6. Run the Command Server
         
         $ cd command-server
+        $ mvn -Dtest=SampleAggregateTest test
         $ mvn spring-boot:run 
 
 7. Run the Query Server
