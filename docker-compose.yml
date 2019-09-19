@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   zookeeper:
     image: wurstmeister/zookeeper
@@ -23,5 +23,5 @@ services:
     image: mongo:3.2.4
     container_name: "mongodbsamplequery"
     ports:
-      - 27018:27018
+      - 27018:27017
     command: --smallfiles
