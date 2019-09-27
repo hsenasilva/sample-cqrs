@@ -1,7 +1,7 @@
 CQRS Sample
 ==================================================
 
-This sample code helps get you started with a CQRS Pattern
+This sample code helps get you started with a CQRS + Event Sourcing Patterns
 
 To know about CQRS: https://martinfowler.com/bliki/CQRS.html
 
