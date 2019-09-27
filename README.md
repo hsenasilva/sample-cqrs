@@ -4,6 +4,7 @@ CQRS Sample
 This sample code helps get you started with a CQRS Pattern
 
 To know about CQRS: https://martinfowler.com/bliki/CQRS.html
+
 To know about Event Sourcing: https://martinfowler.com/eaaDev/EventSourcing.html
 
 Related technologies: 
