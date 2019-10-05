@@ -1,29 +1,26 @@
 server:
   port: 8085
+  servlet:
+    context-path: /query-sample/api
 spring:
   application:
-    name: query-sample
+    name: query-server
   data:
     mongodb:
       host: localhost
       port: 27017
-#  jackson:
-#    serialization:
-#      indent-output: true
-#      write-dates-as-timestamps: false
-#      fail-on-empty-beans: false
-#      fail-on-unknown-properties: false
 
 axon:
+  serializer:
+    general: jackson
   eventhandling:
     processors:
-      query:
+      "[SampleProcessor]":
         mode: tracking
         source: kafkaMessageSource
   kafka:
+    client-id: sample-consumer
     default-topic: axon-events
     consumer:
       group-id: query-group
       bootstrap-servers: localhost:9092
-
-

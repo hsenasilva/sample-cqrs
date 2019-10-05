@@ -44,6 +44,13 @@
     </repositories>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.github.hsenasilva.sample.cqrs</groupId>
+            <artifactId>sample-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -61,10 +68,17 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.axonframework.extensions.springcloud</groupId>
             <artifactId>axon-springcloud-spring-boot-starter</artifactId>
             <version>${axon-spring-cloud-starter.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.axonframework.extensions.kafka</groupId>
+            <artifactId>axon-kafka-spring-boot-starter</artifactId>
+            <version>${axon-kafka-spring-boot-starter}</version>
         </dependency>
 
         <!-- Spring -->
@@ -110,6 +124,13 @@
             <artifactId>kotlin-test</artifactId>
             <version>${kotlin.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Kafka -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>${kafka.clients.version}</version>
         </dependency>
 
         <!-- Gson -->

@@ -1,5 +1,6 @@
 package hsenasilva.com.github.sample.cqrs.domain
 
+import hsenasilva.com.github.sample.cqrs.web.parameters.ListSampleParameter
 import org.axonframework.modelling.command.TargetAggregateIdentifier
 import java.io.Serializable
 
@@ -10,4 +11,3 @@ abstract class SampleEvent(open val listSampleParameter: ListSampleParameter) : 
 
 data class ListSampleCommand(@TargetAggregateIdentifier override val listSampleParameter: ListSampleParameter) : SampleEvent(listSampleParameter)
 
-data class ListedSampleEvent(val sample: Sample?, override val listSampleParameter: ListSampleParameter) : SampleEvent(listSampleParameter)

@@ -1,0 +1,36 @@
+server:
+  port: 8084
+  servlet:
+    context-path: /command-sample/api
+spring:
+  application:
+    name: command-server
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+
+axon:
+  distributed.enabled: true
+  kafka:
+    client-id: sample-producer
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: sample-event-command-group
+    default-topic: axon-events
+    producer:
+      bootstrap-servers: localhost:9092
+      retries: 5
+      transaction-id-prefix: sample-eventstx
+    properties:
+      request:
+        timeout:
+          ms: 4000
+  serializer:
+    general: jackson
+  snapshot:
+    trigger:
+      treshold:
+        sample-events: 100
+        sample-eventsorder: 100
