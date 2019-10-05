@@ -12,6 +12,7 @@ Related technologies:
 * Kotlin: https://kotlinlang.org/docs/reference/
 * Spring Boot: https://spring.io/projects/spring-boot#overview
 * Axon Framework: https://axoniq.io/resources/architectural-concepts
+* Docker: https://www.docker.com/resources/what-container
 * Apache Kafka: https://kafka.apache.org/intro 
 * Zookeeper: https://zookeeper.apache.org/ 
 * MongoDB: https://www.mongodb.com/what-is-mongodb
@@ -29,7 +30,8 @@ This sample includes:
 * pom.xml - this file is the Maven Project Object Model for the web service
 * command-server - this directory contains your Kotlin Service Command source files
 * query-server - this directory contains your Kotlin Service Query source files
-* service-discovery - this directory contains your Kotlin Service Discovery (Eureka)
+* sample-core - this directory contains the shared source code between modules, command-server and query-server 
+* service-discovery - this directory contains your Service Discovery (Eureka) to enable distributed commands
 
 
 Getting Started
@@ -69,7 +71,7 @@ local computer. If you haven't, do that first.
 8. Send Command to create the sample data
 
         $ curl -v -X POST \
-            http://localhost:8084/api/commands/samples \
+            http://localhost:8084/command-sample/api/samples \
             -H 'Content-Type: application/json' \
             -d '{
             "id": 1234,
@@ -78,5 +80,5 @@ local computer. If you haven't, do that first.
 
 9. Call the Query endpoint
         
-        $ curl -v -X GET http://localhost:8085/api/queries/samples/1234  
+        $ curl -v -X GET http://localhost:8085/query-sample/api/samples/1234  
 
