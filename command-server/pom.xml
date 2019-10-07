@@ -104,13 +104,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-framework.version}</version>
+            <version>${sample-cqrs-spring-framework.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
-            <version>${spring-framework.version}</version>
+            <version>${sample-cqrs-spring-framework.version}</version>
         </dependency>
 
         <dependency>
@@ -226,7 +226,16 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.12</version>
+                <configuration>
+                    <repository>hsena/${project.artifactId}</repository>
+                    <tag>1.1</tag>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>
