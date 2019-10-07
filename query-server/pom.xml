@@ -85,27 +85,27 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-framework.version}</version>
+            <version>${sample-cqrs-spring-framework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
-            <version>${spring-framework.version}</version>
+            <version>${sample-cqrs-spring-framework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
-            <version>${spring-framework.version}</version>
+            <version>${sample-cqrs-spring-framework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-            <version>${spring-framework.version}</version>
+            <version>${sample-cqrs-spring-framework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <version>${spring-framework.version}</version>
+            <version>${sample-cqrs-spring-framework.version}</version>
         </dependency>
 
         <!-- Kotlin -->
@@ -200,6 +200,16 @@
                         <version>${kotlin.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.12</version>
+                <configuration>
+                    <repository>hsena/${project.artifactId}</repository>
+                    <tag>1.0</tag>
+                </configuration>
             </plugin>
         </plugins>
     </build>
