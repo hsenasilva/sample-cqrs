@@ -8,5 +8,10 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
+    fetch-registry: false
+    register-with-eureka: false
+#    serviceUrl:
+#      defaultZone: http://127.0.0.1:8761/
   server:
     wait-time-in-ms-when-sync-empty: 0
+    waitTimeInMsWhenSyncEmpty: 0

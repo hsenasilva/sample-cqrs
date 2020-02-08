@@ -6,4 +6,13 @@ import java.io.Serializable
  * @author hsena
  */
 
-data class Sample(val requestId: String, val id: Int?, val stuff: String) : Serializable
+data class SampleId(val id: String)
+
+data class Sample(val id: String, val stuff: String, val action: SampleAction, val status: SampleStatus) : Serializable
+
+enum class SampleAction {
+    CREATE, CREATE_AND_CANCEL
+}
+enum class SampleStatus {
+    REQUESTED, CREATED, CANCELED
+}

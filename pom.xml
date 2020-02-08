@@ -25,7 +25,6 @@
         <kotlin.version>1.3.50</kotlin.version>
         <sample-cqrs-spring-framework.version>2.1.3.RELEASE</sample-cqrs-spring-framework.version>
         <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
-        <spring-cloud-starter-netflix-eureka>2.1.3.RELEASE</spring-cloud-starter-netflix-eureka>
         <kafka.clients.version>0.11.0.2</kafka.clients.version>
         <axon-spring-boot-starter.version>4.2</axon-spring-boot-starter.version>
         <axon-spring-cloud-starter.version>4.2</axon-spring-cloud-starter.version>
@@ -38,7 +37,6 @@
     </properties>
 
     <modules>
-        <module>service-discovery</module>
         <module>query-server</module>
         <module>command-server</module>
         <module>sample-core</module>

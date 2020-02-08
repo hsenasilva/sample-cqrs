@@ -12,7 +12,7 @@ spring:
       port: 27017
 
 axon:
-  distributed.enabled: true
+  distributed.enabled: false
   kafka:
     client-id: sample-producer
     consumer:
