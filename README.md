@@ -23,7 +23,8 @@ What's Here
 This sample includes:
 
 * branch master - Normal spring boot application with servlet container.
-* branch webflux (In progress) - Spring Boot Webflux with Netty server, more functinal style (See https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html for details).
+* branch webflux (In progress) - Spring Boot Webflux with Netty server, more functional style (See https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html for details).
+* branch distributed-command - This branch uses Netflix Eureka to distribute commands. 
 
 * README.md - this file
 * docker-compose.yml - this file is used by Docker Compose (https://docs.docker.com/compose/) to running Kafka, Zookeeper and Mongo
@@ -31,7 +32,7 @@ This sample includes:
 * command-server - this directory contains your Kotlin Service Command source files
 * query-server - this directory contains your Kotlin Service Query source files
 * sample-core - this directory contains the shared source code between modules, command-server and query-server 
-* service-discovery - this directory contains your Service Discovery (Eureka) to enable distributed commands
+* service-discovery (branch distributed-command) - this directory contains your Service Discovery (Eureka) to enable distributed commands
 
 
 Getting Started
@@ -70,13 +71,23 @@ local computer. If you haven't, do that first.
 
 8. Send Command to create the sample data
 
+   action types: 
+    
+    CREATE, 
+                
+    CREATE_AND_CANCEL (This type rollback status to CANCELED using Saga)
+
+
+
         $ curl -v -X POST \
             http://localhost:8084/command-sample/api/samples \
             -H 'Content-Type: application/json' \
             -d '{
             "id": 1234,
-            "stuff": "Lorem Ipsum"
+            "stuff": "Lorem Ipsum",
+            "action": "CREATE"
           }'
+
 
 9. Call the Query endpoint
         
