@@ -73,11 +73,11 @@ local computer. If you haven't, do that first.
 
    action types: 
     
-    CREATE, 
+         CREATE
                 
-    CREATE_AND_CANCEL (This type rollback status to CANCELED using Saga)
-
-
+         CREATE_AND_CANCEL 
+    The action (CREATE_AND_CANCEL) rollback status to CANCELED using [Saga Pattern](https://microservices.io/patterns/data/saga.html)
+-
 
         $ curl -v -X POST \
             http://localhost:8084/command-sample/api/samples \
