@@ -54,7 +54,7 @@ local computer. If you haven't, do that first.
 
         $ docker-compose up -d
 
-5. Run the Eureka (if branch is distributed-command)
+5. Run the Eureka (if distributed-command branch)
         
         $ cd service-discovery 
         $ mvn spring-boot:run 
