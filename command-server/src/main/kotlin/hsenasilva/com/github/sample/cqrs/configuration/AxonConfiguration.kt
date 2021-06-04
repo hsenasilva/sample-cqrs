@@ -1,9 +1,8 @@
 package hsenasilva.com.github.sample.cqrs.configuration
 
-import com.mongodb.MongoClient
+import com.mongodb.client.MongoClient
 import org.axonframework.commandhandling.AsynchronousCommandBus
 import org.axonframework.commandhandling.CommandBus
-import org.axonframework.commandhandling.CommandMessage
 import org.axonframework.common.transaction.TransactionManager
 import org.axonframework.eventsourcing.eventstore.EventStorageEngine
 import org.axonframework.extensions.mongo.DefaultMongoTemplate
@@ -46,7 +45,7 @@ class AxonConfiguration {
 
     private fun registerDispatchInterceptor(commandBus: CommandBus) {
         commandBus.registerDispatchInterceptor {
-            BiFunction<Int, CommandMessage<*>, CommandMessage<*>> { _, message ->
+            BiFunction { _, message ->
                 message.andMetaData(mapOf("tenant" to "sample_segment"))
             }
         }
@@ -62,12 +61,26 @@ class AxonConfiguration {
 
     @Bean
     fun storageEngine(client: MongoClient): EventStorageEngine {
-        return MongoEventStorageEngine.builder().mongoTemplate(DefaultMongoTemplate.builder().mongoDatabase(client).build()).build()
+        return MongoEventStorageEngine
+            .builder()
+            .mongoTemplate(
+                DefaultMongoTemplate
+                    .builder()
+                    .mongoDatabase(client)
+                    .build()
+            ).build()
     }
 
     @Bean
     fun sampleSagaStore(client: MongoClient): SagaStore<Any> {
-        return MongoSagaStore.builder().mongoTemplate(DefaultMongoTemplate.builder().mongoDatabase(client).build()).build()
+        return MongoSagaStore
+            .builder()
+            .mongoTemplate(
+                DefaultMongoTemplate
+                    .builder()
+                    .mongoDatabase(client)
+                    .build()
+            ).build()
     }
 
 }
