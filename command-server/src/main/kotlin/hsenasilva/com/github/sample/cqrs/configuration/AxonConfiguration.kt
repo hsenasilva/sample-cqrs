@@ -3,6 +3,7 @@ package hsenasilva.com.github.sample.cqrs.configuration
 import com.mongodb.client.MongoClient
 import org.axonframework.commandhandling.AsynchronousCommandBus
 import org.axonframework.commandhandling.CommandBus
+import org.axonframework.common.Registration
 import org.axonframework.common.transaction.TransactionManager
 import org.axonframework.eventsourcing.eventstore.EventStorageEngine
 import org.axonframework.extensions.mongo.DefaultMongoTemplate
@@ -28,19 +29,47 @@ class AxonConfiguration {
 
     @Bean
     fun commandBus(txManager: TransactionManager, axonConfiguration: AxonConfiguration): AsynchronousCommandBus {
-        val commandBus = AsynchronousCommandBus.builder()
-                .transactionManager(txManager)
-                .messageMonitor(axonConfiguration.messageMonitor(AsynchronousCommandBus::class.java, "commandBus"))
-                .build()
-        commandBus.registerHandlerInterceptor(CorrelationDataInterceptor(axonConfiguration.correlationDataProviders()))
-        return commandBus
+        return AsynchronousCommandBus
+            .builder()
+            .transactionManager(txManager)
+            .messageMonitor(axonConfiguration.messageMonitor(AsynchronousCommandBus::class.java, "commandBus"))
+            .build()
+            .also { commandBus ->
+                commandBus.registerHandlerInterceptor(
+                    CorrelationDataInterceptor(axonConfiguration.correlationDataProviders())
+                )
+            }
     }
 
     /* useful example to register an interceptor to add some metadata in all commands */
     @Primary
     @Autowired
     fun registerInterceptors(asynchronousCommandBus: AsynchronousCommandBus) {
-        registerDispatchInterceptor(asynchronousCommandBus)
+        this.registerDispatchInterceptor(asynchronousCommandBus)
+    }
+
+    @Autowired
+    fun registerInterceptors(commandBus: CommandBus): Registration = commandBus.registerDispatchInterceptor(BeanValidationInterceptor())
+
+    @Bean
+    fun snapshotterFactoryBean() = SpringAggregateSnapshotterFactoryBean()
+
+    @Bean
+    fun storageEngine(client: MongoClient): EventStorageEngine {
+        return MongoEventStorageEngine
+            .builder()
+            .mongoTemplate(
+                this.mongoTemplate(client)
+            ).build()
+    }
+
+    @Bean
+    fun sampleSagaStore(client: MongoClient): SagaStore<Any> {
+        return MongoSagaStore
+            .builder()
+            .mongoTemplate(
+                this.mongoTemplate(client)
+            ).build()
     }
 
     private fun registerDispatchInterceptor(commandBus: CommandBus) {
@@ -51,36 +80,11 @@ class AxonConfiguration {
         }
     }
 
-    @Autowired
-    fun registerInterceptors(commandBus: CommandBus) {
-        commandBus.registerDispatchInterceptor(BeanValidationInterceptor())
-    }
-
-    @Bean
-    fun snapshotterFactoryBean() = SpringAggregateSnapshotterFactoryBean()
-
-    @Bean
-    fun storageEngine(client: MongoClient): EventStorageEngine {
-        return MongoEventStorageEngine
+    private fun mongoTemplate(client: MongoClient): DefaultMongoTemplate {
+        return DefaultMongoTemplate
             .builder()
-            .mongoTemplate(
-                DefaultMongoTemplate
-                    .builder()
-                    .mongoDatabase(client)
-                    .build()
-            ).build()
-    }
-
-    @Bean
-    fun sampleSagaStore(client: MongoClient): SagaStore<Any> {
-        return MongoSagaStore
-            .builder()
-            .mongoTemplate(
-                DefaultMongoTemplate
-                    .builder()
-                    .mongoDatabase(client)
-                    .build()
-            ).build()
+            .mongoDatabase(client)
+            .build()
     }
 
 }

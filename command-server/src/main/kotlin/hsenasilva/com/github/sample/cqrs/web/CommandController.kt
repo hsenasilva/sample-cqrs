@@ -25,7 +25,12 @@ class CommandController(private val commandGateway: CommandGateway,
             this.commandGateway.send(
                     CreateSampleCommand(
                             id = SampleId(parameter.id),
-                            createSampleParameter = CreateSampleParameter(SampleId(parameter.id), parameter.stuff, parameter.action)
+                            createSampleParameter =
+                                CreateSampleParameter(
+                                    SampleId(parameter.id),
+                                    parameter.stuff,
+                                    parameter.action
+                                )
                     ),
                     this.commandGatewayCallback
             )
