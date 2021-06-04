@@ -29,6 +29,8 @@ axon:
           ms: 4000
   serializer:
     general: jackson
+    events: jackson
+    messages: jackson
   snapshot:
     trigger:
       treshold:

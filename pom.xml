@@ -26,12 +26,7 @@
         <sample-cqrs-spring-framework.version>2.3.7.RELEASE</sample-cqrs-spring-framework.version>
         <spring-cloud.version>Hoxton.SR11</spring-cloud.version>
         <kafka.clients.version>2.3.1</kafka.clients.version>
-<!--        <kafka.clients.version>0.11.0.2</kafka.clients.version>-->
-<!--        <axon-spring-boot-starter.version>4.2</axon-spring-boot-starter.version>-->
-<!--        <axon-spring-cloud-starter.version>4.2</axon-spring-cloud-starter.version>-->
         <axon.version>4.5.1</axon.version>
-<!--        <axon-extension.version>4.2</axon-extension.version>-->
-<!--        <axon-extension-mongo.version>4.2</axon-extension-mongo.version>-->
         <axon-kafka-spring-boot-starter>4.0-RC2</axon-kafka-spring-boot-starter>
         <jackson.module.kotlin.version>2.12.3</jackson.module.kotlin.version>
         <apache-commons.version>3.12.0</apache-commons.version>

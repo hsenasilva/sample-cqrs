@@ -1,5 +1,9 @@
 package hsenasilva.com.github.sample.cqrs.configuration
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect
+import com.fasterxml.jackson.annotation.PropertyAccessor
+import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.mongodb.client.MongoClient
 import org.axonframework.commandhandling.AsynchronousCommandBus
 import org.axonframework.commandhandling.CommandBus
@@ -12,6 +16,8 @@ import org.axonframework.extensions.mongo.eventsourcing.eventstore.MongoEventSto
 import org.axonframework.messaging.interceptors.BeanValidationInterceptor
 import org.axonframework.messaging.interceptors.CorrelationDataInterceptor
 import org.axonframework.modelling.saga.repository.SagaStore
+import org.axonframework.serialization.Serializer
+import org.axonframework.serialization.json.JacksonSerializer
 import org.axonframework.spring.config.AxonConfiguration
 import org.axonframework.spring.eventsourcing.SpringAggregateSnapshotterFactoryBean
 import org.springframework.beans.factory.annotation.Autowired
@@ -70,6 +76,19 @@ class AxonConfiguration {
             .mongoTemplate(
                 this.mongoTemplate(client)
             ).build()
+    }
+
+    @Bean
+    @Primary
+    fun serializer(): Serializer {
+        return JacksonSerializer
+            .builder()
+            .objectMapper(
+                jacksonObjectMapper()
+                    .registerModule(KotlinModule())
+                    .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
+            )
+            .build()
     }
 
     private fun registerDispatchInterceptor(commandBus: CommandBus) {
