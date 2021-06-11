@@ -3,7 +3,6 @@ package hsenasilva.com.github.sample.cqrs.aggregate
 import hsenasilva.com.github.sample.cqrs.core.domain.*
 import hsenasilva.com.github.sample.cqrs.domain.CancelCreateSampleCommand
 import hsenasilva.com.github.sample.cqrs.domain.CreateSampleCommand
-import hsenasilva.com.github.sample.cqrs.domain.RequestSampleCommand
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.eventsourcing.EventSourcingHandler
 import org.axonframework.modelling.command.AggregateCreationPolicy

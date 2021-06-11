@@ -14,5 +14,5 @@ enum class SampleAction {
     CREATE, CREATE_AND_CANCEL
 }
 enum class SampleStatus {
-    REQUESTED, CREATED, CANCELED
+    CREATED, CANCELED
 }
