@@ -31,8 +31,7 @@ class CommandController(private val commandGateway: CommandGateway,
                                     parameter.stuff,
                                     parameter.action
                                 )
-                    ),
-                    this.commandGatewayCallback
+                    ), this.commandGatewayCallback
             )
 
 }

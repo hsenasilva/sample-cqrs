@@ -6,8 +6,10 @@ import hsenasilva.com.github.sample.cqrs.domain.CreateSampleCommand
 import hsenasilva.com.github.sample.cqrs.domain.RequestSampleCommand
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.eventsourcing.EventSourcingHandler
+import org.axonframework.modelling.command.AggregateCreationPolicy
 import org.axonframework.modelling.command.AggregateIdentifier
 import org.axonframework.modelling.command.AggregateLifecycle.apply
+import org.axonframework.modelling.command.CreationPolicy
 import org.axonframework.spring.stereotype.Aggregate
 
 /**
@@ -23,19 +25,7 @@ class SampleAggregate {
     constructor()
 
     @CommandHandler
-    constructor(command: RequestSampleCommand) {
-        apply(RequestedSampleEvent(
-                sampleId = command.id,
-                sample = Sample(
-                        id = command.createSampleParameter.id.id,
-                        stuff = command.createSampleParameter.stuff,
-                        action = command.createSampleParameter.action,
-                        status = SampleStatus.REQUESTED
-                )
-        ))
-    }
-
-    @CommandHandler
+    @CreationPolicy(AggregateCreationPolicy.CREATE_IF_MISSING)
     fun handle(command: CreateSampleCommand) {
         apply(CreatedSampleEvent(
                 sampleId = command.id,
