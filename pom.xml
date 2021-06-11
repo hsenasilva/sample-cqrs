@@ -61,7 +61,7 @@
     </dependencyManagement>
 
     <modules>
-<!--        <module>query-server</module>-->
+        <module>query-server</module>
         <module>command-server</module>
         <module>sample-core</module>
     </modules>

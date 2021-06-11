@@ -7,6 +7,6 @@ import java.math.BigDecimal
  */
 
 abstract class AccountEvent(val id: Account)
-data class CreatedCheckingAccount(val Account: Account) : AccountEvent(id = Account)
-data class DebitedBalance(val Account: Account, val value: BigDecimal) : AccountEvent(id = Account)
-data class CreditedBalance(val Account: Account, val value: BigDecimal) : AccountEvent(id = Account)
+data class CreatedCheckingAccount(val account: Account) : AccountEvent(id = account)
+data class DebitedBalance(val account: Account, val value: BigDecimal) : AccountEvent(id = account)
+data class CreditedBalance(val account: Account, val value: BigDecimal) : AccountEvent(id = account)

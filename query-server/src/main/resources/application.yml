@@ -17,10 +17,11 @@ axon:
     processors:
       "[SampleProcessor]":
         mode: tracking
-        source: kafkaMessageSource
+        source: streamableKafkaMessageSource
   kafka:
     client-id: sample-consumer
     default-topic: axon-events
     consumer:
       group-id: query-group
       bootstrap-servers: localhost:9092
+      event-processor-mode: tracking

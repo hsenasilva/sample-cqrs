@@ -30,7 +30,7 @@ class CheckingAccountAggregate {
     constructor(command: CreateCheckingAccountCommand) {
         apply(
             CreatedCheckingAccount(
-                Account = command.id,
+                account = command.id,
             )
         )
     }
@@ -39,7 +39,7 @@ class CheckingAccountAggregate {
     fun handle(command: CreditBalanceCommand) {
         apply(
             CreditedBalance(
-                Account = command.id,
+                account = command.id,
                 value = command.value
             )
         )
@@ -50,7 +50,7 @@ class CheckingAccountAggregate {
         if (command.value < BigDecimal.ZERO)
             apply(
                 DebitedBalance(
-                    Account = command.id,
+                    account = command.id,
                     value = command.value
                 )
             )
