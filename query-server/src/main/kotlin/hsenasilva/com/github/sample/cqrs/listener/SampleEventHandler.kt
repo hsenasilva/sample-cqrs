@@ -1,8 +1,8 @@
 package hsenasilva.com.github.sample.cqrs.listener
 
-import hsenasilva.com.github.sample.cqrs.core.domain.CanceledCreateSampleEvent
-import hsenasilva.com.github.sample.cqrs.core.domain.CreatedSampleEvent
-import hsenasilva.com.github.sample.cqrs.core.domain.RequestedSampleEvent
+import hsenasilva.com.github.sample.cqrs.core.domain.CreditedBalance
+import hsenasilva.com.github.sample.cqrs.core.domain.DebitedBalance
+import hsenasilva.com.github.sample.cqrs.core.domain.CreatedCheckingAccount
 import hsenasilva.com.github.sample.cqrs.domain.SampleEntity
 import hsenasilva.com.github.sample.cqrs.repository.SampleRepository
 import org.axonframework.config.ProcessingGroup
@@ -18,29 +18,29 @@ import org.springframework.stereotype.Component
 class SampleEventHandler {
 
     @EventHandler
-    fun handle(event: RequestedSampleEvent, @Autowired repository: SampleRepository) {
+    fun handle(event: CreatedCheckingAccount, @Autowired repository: SampleRepository) {
         repository.findById(event.sample.id).map { entity ->
             repository.save(SampleEntity(entity.id, event.sample.stuff, event.sample.status))
         }.orElseGet {
-            repository.save(SampleEntity(event.sampleId, event.sample.stuff, event.sample.status))
+            repository.save(SampleEntity(event.Account, event.sample.stuff, event.sample.status))
         }
     }
 
     @EventHandler
-    fun handle(event: CreatedSampleEvent, @Autowired repository: SampleRepository) {
-        repository.findById(event.sample.id).map { entity ->
-            repository.save(SampleEntity(entity.id, event.sample.stuff, event.sample.status))
+    fun handle(event: DebitedBalance, @Autowired repository: SampleRepository) {
+        repository.findById(event.value.id).map { entity ->
+            repository.save(SampleEntity(entity.id, event.value.stuff, event.value.status))
         }.orElseGet {
-            repository.save(SampleEntity(event.sampleId, event.sample.stuff, event.sample.status))
+            repository.save(SampleEntity(event.Account, event.value.stuff, event.value.status))
         }
     }
 
     @EventHandler
-    fun handle(event: CanceledCreateSampleEvent, @Autowired repository: SampleRepository) {
-        repository.findById(event.sample.id).map { entity ->
-            repository.save(SampleEntity(entity.id, event.sample.stuff, event.sample.status))
+    fun handle(event: CreditedBalance, @Autowired repository: SampleRepository) {
+        repository.findById(event.value.id).map { entity ->
+            repository.save(SampleEntity(entity.id, event.value.stuff, event.value.status))
         }.orElseGet {
-            repository.save(SampleEntity(event.sampleId, event.sample.stuff, event.sample.status))
+            repository.save(SampleEntity(event.Account, event.value.stuff, event.value.status))
         }
     }
 

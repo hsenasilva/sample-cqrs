@@ -1,15 +1,13 @@
 package hsenasilva.com.github.sample.cqrs.domain
 
-import hsenasilva.com.github.sample.cqrs.core.domain.SampleId
-import hsenasilva.com.github.sample.cqrs.web.parameters.CreateSampleParameter
+import hsenasilva.com.github.sample.cqrs.core.domain.Account
 import org.axonframework.modelling.command.TargetAggregateIdentifier
+import java.math.BigDecimal
 
 /**
  * @author hsena
  */
-abstract class SampleCommand(open val id: SampleId)
-data class CreateSampleCommand(@TargetAggregateIdentifier override val id: SampleId, val createSampleParameter: CreateSampleParameter): SampleCommand(id)
-data class RequestSampleCommand(@TargetAggregateIdentifier override val id: SampleId, val createSampleParameter: CreateSampleParameter): SampleCommand(id)
-data class CancelCreateSampleCommand(@TargetAggregateIdentifier override val id: SampleId, val createSampleParameter: CreateSampleParameter): SampleCommand(id)
-
-
+abstract class AccountCommand(open val id: Account)
+data class CreateCheckingAccountCommand(@TargetAggregateIdentifier override val id: Account) : AccountCommand(id)
+data class CreditBalanceCommand(@TargetAggregateIdentifier override val id: Account, val value: BigDecimal) : AccountCommand(id)
+data class DebitBalanceCommand(@TargetAggregateIdentifier override val id: Account, val value: BigDecimal) : AccountCommand(id)
