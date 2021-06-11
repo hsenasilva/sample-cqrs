@@ -78,7 +78,7 @@ local computer. If you haven't, do that first.
          CREATE_AND_CANCEL 
     The action (CREATE_AND_CANCEL) rollback status to CANCELED using [Saga Pattern](https://microservices.io/patterns/data/saga.html)
 
-        $ curl -v -X POST \
+        $ curl -v -X PUT \
             http://localhost:8084/command-sample/api/samples \
             -H 'Content-Type: application/json' \
             -d '{
