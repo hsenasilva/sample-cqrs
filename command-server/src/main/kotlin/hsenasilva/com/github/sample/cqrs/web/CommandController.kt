@@ -7,11 +7,8 @@ import hsenasilva.com.github.sample.cqrs.web.callback.CommandGatewayCallback
 import hsenasilva.com.github.sample.cqrs.web.parameters.AmountParameter
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
 import javax.validation.Valid
 import javax.validation.constraints.NotNull
 
@@ -25,9 +22,9 @@ class CommandController(
     private val commandGatewayCallback: CommandGatewayCallback
 ) {
 
-    @PostMapping("credit-balance")
+    @PostMapping("credit")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    fun activeAccount(@RequestBody @Valid @NotNull amountParameter: AmountParameter) =
+    fun credit(@RequestBody @Valid @NotNull amountParameter: AmountParameter) =
         this.commandGateway.send(
             CreditBalanceCommand(
                 id = Account(amountParameter.id),
@@ -36,13 +33,18 @@ class CommandController(
             this.commandGatewayCallback
         )
 
-    @PostMapping("debit-account")
+    @PostMapping("debit")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    fun creditAccoutn(@RequestBody @Valid @NotNull amountParameter: AmountParameter) =
-        this.commandGateway.sendAndWait<Any>(
-            DebitBalanceCommand(
-                id = Account(amountParameter.id),
-                value = amountParameter.value
+    fun debit(@RequestBody @Valid @NotNull amountParameter: AmountParameter) {
+        try {
+            this.commandGateway.sendAndWait<Any>(
+                DebitBalanceCommand(
+                    id = Account(amountParameter.id),
+                    value = amountParameter.value
+                )
             )
-        )
+        } catch (e: Exception) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST)
+        }
+    }
 }

@@ -47,13 +47,15 @@ class CheckingAccountAggregate {
 
     @CommandHandler
     fun handle(command: DebitBalanceCommand) {
-        if (command.value < BigDecimal.ZERO)
-            apply(
-                DebitedBalance(
-                    account = command.id,
-                    value = command.value
-                )
+        if (command.value > BigDecimal.ZERO) {
+            throw IllegalArgumentException("value >= 0")
+        }
+        apply(
+            DebitedBalance(
+                account = command.id,
+                value = command.value
             )
+        )
     }
 
     @EventSourcingHandler
