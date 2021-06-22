@@ -16,8 +16,8 @@ import javax.validation.constraints.NotNull
  * @author hsena
  */
 @RestController
-@RequestMapping(value = ["/commands"])
-class CommandController(
+@RequestMapping(value = ["/checking-accounts"])
+class CheckingAccountController(
     private val commandGateway: CommandGateway,
     private val commandGatewayCallback: CommandGatewayCallback
 ) {
