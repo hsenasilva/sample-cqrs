@@ -1,6 +1,6 @@
 package hsenasilva.com.github.sample.cqrs.repository
 
-import hsenasilva.com.github.sample.cqrs.domain.SampleEntity
+import hsenasilva.com.github.sample.cqrs.domain.BalanceEntity
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository
  * @author hsena
  */
 @Repository
-interface SampleRepository : MongoRepository<SampleEntity, String> {
+interface BalanceRepository : MongoRepository<BalanceEntity, String> {
 
-    fun findById(id: Int?): SampleEntity?
-
+    fun findById(id: String?): BalanceEntity?
 }
