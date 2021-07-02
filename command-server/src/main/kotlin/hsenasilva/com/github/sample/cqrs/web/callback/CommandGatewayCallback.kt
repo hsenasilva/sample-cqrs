@@ -1,6 +1,6 @@
 package hsenasilva.com.github.sample.cqrs.web.callback
 
-import hsenasilva.com.github.sample.cqrs.domain.CreateCheckingAccountCommand
+import hsenasilva.com.github.sample.cqrs.domain.CreditBalanceCommand
 import org.axonframework.commandhandling.CommandCallback
 import org.axonframework.commandhandling.CommandMessage
 import org.axonframework.commandhandling.CommandResultMessage
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component
  * @author hsena
  */
 @Component
-class CommandGatewayCallback : CommandCallback<CreateCheckingAccountCommand, String> {
+class CommandGatewayCallback : CommandCallback<CreditBalanceCommand, String> {
 
-    override fun onResult(commandMessage: CommandMessage<out CreateCheckingAccountCommand>, commandResultMessage: CommandResultMessage<out String>) {
+    override fun onResult(commandMessage: CommandMessage<out CreditBalanceCommand>, commandResultMessage: CommandResultMessage<out String>) {
         when {
             commandResultMessage.isExceptional && commandResultMessage.exceptionResult() is AggregateNotFoundException -> {
                 LOGGER.error("Command resulted in exception: ${commandMessage.commandName}", commandResultMessage.exceptionResult())

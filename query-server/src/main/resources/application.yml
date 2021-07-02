@@ -15,14 +15,13 @@ axon:
     general: jackson
   eventhandling:
     processors:
-      "[SampleProcessor]":
+      "[BalanceProcessor]":
         mode: tracking
         source: streamableKafkaMessageSource
   kafka:
-    client-id: sample-consumer
+    client-id: balance-consumer
     default-topic: axon-events
     consumer:
       event-processor-mode: tracking
       group-id: query-group
       bootstrap-servers: localhost:9092
-      event-processor-mode: tracking

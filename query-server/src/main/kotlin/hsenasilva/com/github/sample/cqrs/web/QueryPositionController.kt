@@ -1,6 +1,5 @@
 package hsenasilva.com.github.sample.cqrs.web
 
-import hsenasilva.com.github.sample.cqrs.core.domain.Account
 import hsenasilva.com.github.sample.cqrs.domain.BalanceEntity
 import hsenasilva.com.github.sample.cqrs.repository.BalanceRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,15 +14,13 @@ import org.springframework.web.bind.annotation.RestController
  * @author hsena
  */
 @RestController
-@RequestMapping(value = ["/queries/accounts"])
-class QueryController(@Autowired val repository: BalanceRepository) {
+@RequestMapping(value = ["/balances"])
+class BalanceController(@Autowired val repository: BalanceRepository) {
 
-    @GetMapping(value = ["/balance/{id}"])
-    fun getBalance(@PathVariable id: String): ResponseEntity<BalanceEntity> {
-
-        return this.repository.findById(id)?.let {
-
-            ResponseEntity.status(HttpStatus.OK).body(it.get())
-        } ?: ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+    @GetMapping(value = ["/{account}"])
+    fun findBalance(@PathVariable account: String): ResponseEntity<BalanceEntity> {
+        return this.repository.findById(account)
+            .map { result -> ResponseEntity.status(HttpStatus.OK).body(result) }
+            .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build())
     }
 }

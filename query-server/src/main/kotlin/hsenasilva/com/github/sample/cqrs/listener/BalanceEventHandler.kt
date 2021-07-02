@@ -13,24 +13,26 @@ import org.springframework.stereotype.Component
  * @author hsena
  */
 @Component
-@ProcessingGroup("SampleProcessor")
+@ProcessingGroup("BalanceProcessor")
 class BalanceEventHandler {
 
     @EventHandler
     fun handle(event: CreditedBalance, @Autowired repository: BalanceRepository) {
-        repository.findById(event.account.id).map { entity ->
-            repository.save(BalanceEntity(entity.id, entity.balance.plus(event.value)))
-        }.orElseGet {
-            repository.save(BalanceEntity(event.account.id, event.value))
-        }
+        repository.findById(event.account.id)
+            .map { entity ->
+                repository.save(BalanceEntity(entity.account, event.balance))
+            }.orElseGet {
+                repository.save(BalanceEntity(event.account.id, event.balance))
+            }
     }
 
     @EventHandler
     fun handle(event: DebitedBalance, @Autowired repository: BalanceRepository) {
-        repository.findById(event.account.id).map { entity ->
-            repository.save(BalanceEntity(entity.id, entity.balance.plus(event.value)))
-        }.orElseGet {
-            repository.save(BalanceEntity(event.account.id, event.value))
-        }
+        repository.findById(event.account.id)
+            .map { entity ->
+                repository.save(BalanceEntity(entity.account, event.balance))
+            }.orElseGet {
+                repository.save(BalanceEntity(event.account.id, event.balance))
+            }
     }
 }

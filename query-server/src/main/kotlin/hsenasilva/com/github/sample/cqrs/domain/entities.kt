@@ -9,4 +9,4 @@ import java.math.BigDecimal
  * @author hsena
  */
 @Document(collection = "balance")
-data class BalanceEntity(@Id val id: String?, val balance: BigDecimal) : Serializable
+data class BalanceEntity(@Id val account: String?, val balance: BigDecimal) : Serializable

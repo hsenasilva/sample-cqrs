@@ -8,7 +8,4 @@ import org.springframework.stereotype.Repository
  * @author hsena
  */
 @Repository
-interface BalanceRepository : MongoRepository<BalanceEntity, String> {
-
-    fun findById(id: String?): BalanceEntity?
-}
+interface BalanceRepository : MongoRepository<BalanceEntity, String>

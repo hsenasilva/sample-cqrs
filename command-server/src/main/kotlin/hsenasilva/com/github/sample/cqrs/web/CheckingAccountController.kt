@@ -22,29 +22,29 @@ class CheckingAccountController(
     private val commandGatewayCallback: CommandGatewayCallback
 ) {
 
-    @PostMapping("credit")
+    @PutMapping("/{id}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    fun credit(@RequestBody @Valid @NotNull amountParameter: AmountParameter) =
+    fun credit(@PathVariable id: String, @RequestBody @Valid @NotNull amountParameter: AmountParameter) =
         this.commandGateway.send(
             CreditBalanceCommand(
-                id = Account(amountParameter.id),
+                id = Account(id),
                 value = amountParameter.value
             ),
             this.commandGatewayCallback
         )
 
-    @PostMapping("debit")
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
-    fun debit(@RequestBody @Valid @NotNull amountParameter: AmountParameter) {
+    @PutMapping("/debit/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    fun debit(@PathVariable id: String, @RequestBody @Valid @NotNull amountParameter: AmountParameter) {
         try {
             this.commandGateway.sendAndWait<Any>(
                 DebitBalanceCommand(
-                    id = Account(amountParameter.id),
+                    id = Account(id),
                     value = amountParameter.value
                 )
             )
         } catch (e: Exception) {
-            throw ResponseStatusException(HttpStatus.BAD_REQUEST)
+            throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
 }
