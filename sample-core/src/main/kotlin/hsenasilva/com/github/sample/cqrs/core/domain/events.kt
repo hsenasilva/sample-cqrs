@@ -6,7 +6,6 @@ import java.math.BigDecimal
 /**
  * @author hsena
  */
-
 abstract class AccountEvent(val id: Account)
 @Revision("1.0")
 data class CreatedCheckingAccount(val account: Account) : AccountEvent(id = account)

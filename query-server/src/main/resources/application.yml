@@ -22,6 +22,7 @@ axon:
     client-id: sample-consumer
     default-topic: axon-events
     consumer:
+      event-processor-mode: tracking
       group-id: query-group
       bootstrap-servers: localhost:9092
       event-processor-mode: tracking
