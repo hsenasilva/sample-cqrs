@@ -2,7 +2,6 @@ package hsenasilva.com.github.sample.cqrs.saga
 
 import hsenasilva.com.github.sample.cqrs.core.domain.CanceledCreateSampleEvent
 import hsenasilva.com.github.sample.cqrs.core.domain.CreatedSampleEvent
-import hsenasilva.com.github.sample.cqrs.core.domain.RequestedSampleEvent
 import hsenasilva.com.github.sample.cqrs.core.domain.SampleAction
 import hsenasilva.com.github.sample.cqrs.domain.CancelCreateSampleCommand
 import hsenasilva.com.github.sample.cqrs.web.parameters.CreateSampleParameter
@@ -23,14 +22,6 @@ class SampleSaga {
     @Autowired
     @Transient
     private val commandGateway: CommandGateway? = null
-
-    @StartSaga
-    @SagaEventHandler(associationProperty = "id")
-    fun handle(event: RequestedSampleEvent) {
-        println("Start Saga RequestedSampleEvent")
-        println("sample id: $event.sampleId")
-        println("End")
-    }
 
     @StartSaga
     @SagaEventHandler(associationProperty = "id")

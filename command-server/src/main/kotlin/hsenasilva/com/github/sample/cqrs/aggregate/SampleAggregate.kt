@@ -57,12 +57,6 @@ class SampleAggregate {
     }
 
     @EventSourcingHandler
-    fun on(event: RequestedSampleEvent) {
-        this.id = event.id
-        this.status = event.sample.status
-    }
-
-    @EventSourcingHandler
     fun on(event: CanceledCreateSampleEvent) {
         this.id = SampleId(event.sampleId.id)
         this.status = event.sample.status
