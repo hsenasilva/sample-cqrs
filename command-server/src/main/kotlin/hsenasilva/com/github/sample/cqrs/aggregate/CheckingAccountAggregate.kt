@@ -9,7 +9,7 @@ import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.eventsourcing.EventSourcingHandler
 import org.axonframework.modelling.command.AggregateCreationPolicy
 import org.axonframework.modelling.command.AggregateIdentifier
-import org.axonframework.modelling.command.AggregateLifecycle.apply
+import org.axonframework.modelling.command.AggregateLifecycle
 import org.axonframework.modelling.command.CreationPolicy
 import org.axonframework.spring.stereotype.Aggregate
 import java.math.BigDecimal
@@ -17,7 +17,7 @@ import java.math.BigDecimal
 /**
  * @author hsena
  */
-@Aggregate
+@Aggregate(snapshotTriggerDefinition = "snapshotTriggerDefinition", repository = "snapshotRepository")
 class CheckingAccountAggregate {
 
     @AggregateIdentifier
@@ -29,7 +29,10 @@ class CheckingAccountAggregate {
     @CommandHandler
     @CreationPolicy(AggregateCreationPolicy.CREATE_IF_MISSING)
     fun handle(command: CreditBalanceCommand) {
-        apply(
+        if (command.value < BigDecimal.ZERO) {
+            throw IllegalArgumentException("value > 0")
+        }
+        AggregateLifecycle.apply(
             CreditedBalance(
                 account = command.id,
                 value = command.value,
@@ -42,9 +45,9 @@ class CheckingAccountAggregate {
     @CreationPolicy(AggregateCreationPolicy.CREATE_IF_MISSING)
     fun handle(command: DebitBalanceCommand) {
         if (command.value > BigDecimal.ZERO) {
-            throw IllegalArgumentException("value >= 0")
+            throw IllegalArgumentException("value < 0")
         }
-        apply(
+        AggregateLifecycle.apply(
             DebitedBalance(
                 account = command.id,
                 value = command.value,

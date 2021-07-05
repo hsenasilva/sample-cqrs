@@ -4,7 +4,6 @@ import hsenasilva.com.github.sample.cqrs.domain.CreditBalanceCommand
 import org.axonframework.commandhandling.CommandCallback
 import org.axonframework.commandhandling.CommandMessage
 import org.axonframework.commandhandling.CommandResultMessage
-import org.axonframework.modelling.command.AggregateNotFoundException
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
@@ -16,7 +15,7 @@ class CommandGatewayCallback : CommandCallback<CreditBalanceCommand, String> {
 
     override fun onResult(commandMessage: CommandMessage<out CreditBalanceCommand>, commandResultMessage: CommandResultMessage<out String>) {
         when {
-            commandResultMessage.isExceptional && commandResultMessage.exceptionResult() is AggregateNotFoundException -> {
+            commandResultMessage.isExceptional -> {
                 LOGGER.error("Command resulted in exception: ${commandMessage.commandName}", commandResultMessage.exceptionResult())
             }
             else -> LOGGER.info("Command executed successfully: ${commandMessage.commandName}")

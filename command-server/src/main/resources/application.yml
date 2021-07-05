@@ -15,9 +15,6 @@ axon:
   distributed.enabled: false
   kafka:
     client-id: sample-producer
-    consumer:
-      bootstrap-servers: localhost:9092
-      group-id: sample-event-command-group
     default-topic: axon-events
     producer:
       bootstrap-servers: localhost:9092
@@ -33,6 +30,5 @@ axon:
     messages: jackson
   snapshot:
     trigger:
-      treshold:
-        sample-events: 100
-        sample-eventsorder: 100
+      threshold:
+        sample-events: 3

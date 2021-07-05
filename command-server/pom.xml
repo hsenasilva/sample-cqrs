@@ -8,7 +8,7 @@
 
     <name>command-server</name>
     <version>0.1.0</version>
-    <description>Commands, Eventsourcing Server</description>
+    <description>Commands, Event Sourcing Server</description>
 
     <parent>
         <groupId>com.github.hsenasilva.sample.cqrs</groupId>
