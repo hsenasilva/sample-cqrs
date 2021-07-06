@@ -6,7 +6,6 @@ import org.axonframework.common.transaction.TransactionManager
 import org.axonframework.eventsourcing.eventstore.EventStorageEngine
 import org.axonframework.extensions.mongo.DefaultMongoTemplate
 import org.axonframework.extensions.mongo.eventsourcing.eventstore.MongoEventStorageEngine
-import org.axonframework.messaging.interceptors.CorrelationDataInterceptor
 import org.axonframework.spring.config.AxonConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -22,13 +21,7 @@ class AxonConfiguration {
         return AsynchronousCommandBus
             .builder()
             .transactionManager(txManager)
-            .messageMonitor(axonConfiguration.messageMonitor(AsynchronousCommandBus::class.java, "commandBus"))
             .build()
-            .also { commandBus ->
-                commandBus.registerHandlerInterceptor(
-                    CorrelationDataInterceptor(axonConfiguration.correlationDataProviders())
-                )
-            }
     }
 
     @Bean
