@@ -12,7 +12,6 @@ spring:
       port: 27017
 
 axon:
-  distributed.enabled: false
   kafka:
     client-id: sample-producer
     default-topic: axon-events

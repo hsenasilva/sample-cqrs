@@ -7,4 +7,4 @@ import javax.validation.constraints.NotNull
  * @author hsena
  */
 
-data class AmountParameter(@NotNull val value: BigDecimal)
+data class BalanceEntryParameter(@NotNull val value: BigDecimal)
